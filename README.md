@@ -3,12 +3,14 @@
 
 This is the beginnings of a spark/hdfs cluster that runs on a single node.
 
-based on teh work of
+based on the work of
 
 [GettyImages](https://github.com/gettyimages/docker-spark)
+
 [SquenceIQ](https://hub.docker.com/r/sequenceiq/hadoop-docker/)
 
-Uses[docker-compose](http://docs.docker.com/compose):
+Uses [docker-compose](http://docs.docker.com/compose):
+
 
     docker-compose up
 
