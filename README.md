@@ -36,5 +36,5 @@ To run the 'WordCount Java sample'
     cd spark-example
     mvn package
     docker build -t spark/wordcount
-    docker run --link dockerspark_hdfs_1:hdfs -ti tamr/sparktest
+    docker run --link dockerspark_hdfs_1:hdfs -ti spark/wordcount
 
