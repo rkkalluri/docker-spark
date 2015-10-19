@@ -1,16 +1,9 @@
-hdfs:
-  image: sequenceiq/hadoop-docker
-  volumes:
-   - /tmp/hadoop-root
-   - /home/ubuntu/data:/tmp/data
-  ports:
-   - 50070:50070
 master:
-  image: gettyimages/spark
-  command: /usr/spark/bin/spark-class org.apache.spark.deploy.master.Master -h master
-  hostname: master
+  build: spark/.
+  command: /usr/spark/bin/spark-class org.apache.spark.deploy.master.Master -h c1.tamrfield.com
   environment:
     SPARK_CONF_DIR: /conf
+  hostname: c1.tamrfield.com
   expose:
     - 7001
     - 7002
@@ -28,21 +21,16 @@ master:
   volumes:
     - ./conf/master:/conf
     - ./data:/tmp/data
-  links:
-    - hdfs
 worker:
-  image: gettyimages/spark
-  command: /usr/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
-  hostname: worker
+  image: quay.io/tamr/spark
+  command: /usr/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://c1.tamrfield.com:7077
   environment:
     SPARK_CONF_DIR: /conf
     SPARK_WORKER_CORES: 2
     SPARK_WORKER_MEMORY: 1g
     SPARK_WORKER_PORT: 8881
     SPARK_WORKER_WEBUI_PORT: 8081
-  links:
-    - master
-    - hdfs
+    SPARK_PUBLIC_DNS: c1.tamrfield.com
   expose:
     - 7012
     - 7013

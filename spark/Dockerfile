@@ -1,5 +1,5 @@
-FROM debian:jessie
-MAINTAINER Getty Images "https://github.com/gettyimages"
+FROM ubuntu:14.04
+MAINTAINER Jeffrey Ellin 
 
 RUN apt-get update \
   && apt-get install -y curl net-tools unzip python \
@@ -18,7 +18,7 @@ RUN curl -sL --retry 3 --insecure \
   && rm -rf $JAVA_HOME/man
 
 # SPARK
-ENV SPARK_VERSION 1.5.1
+ENV SPARK_VERSION 1.4.1
 ENV HADOOP_VERSION 2.6
 ENV SPARK_PACKAGE $SPARK_VERSION-bin-hadoop$HADOOP_VERSION
 ENV SPARK_HOME /usr/spark-$SPARK_PACKAGE
